@@ -40,25 +40,20 @@ def matches_salary_range(job: Dict, salary: Union[int, str]) -> bool:
         if not check_field(job, salary):
             raise ValueError
         return int(job["min_salary"]) <= int(salary) <= int(job["max_salary"])
-    except TypeError:
+    except Exception:
         raise ValueError
 
 
 def filter_by_salary_range(
     jobs: List[dict], salary: Union[str, int]
 ) -> List[Dict]:
-    """Filters a list of jobs by salary range
 
-    Parameters
-    ----------
-    jobs : list
-        The jobs to be filtered
-    salary : int
-        The salary to be used as filter
-
-    Returns
-    -------
-    list
-        Jobs whose salary range contains `salary`
-    """
-    raise NotImplementedError
+    jobs_list_by_salary = []
+    for job in jobs:
+        try:
+            check = matches_salary_range(job, salary)
+            if check:
+                jobs_list_by_salary.append(job)
+        except ValueError:
+            ValueError
+    return jobs_list_by_salary
