@@ -76,7 +76,7 @@ def check_job(index):
     jobs = read(path="data/jobs.csv")
     job = get_job(jobs, index)
 
-    return job
+    return render_template("job.jinja2", job=job)
 
 
 def init_app(app: Flask):
